@@ -85,7 +85,7 @@ export default class App extends React.Component<{}, IState>{
 			/>
 			<button onClick={function() : void{
 				this.onSubmit()
-			}.bind(this)}>추가</button>
+			}.bind(this)}>ADD</button>
 			<h1>TodoList</h1>
 			<TodoList
 				app={this}

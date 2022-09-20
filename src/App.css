@@ -1,3 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+*{
+	font-family: 'Jua', sans-serif;
+	box-sizing: border-box;
+}
+
 body{
-	background-color: #C689C6;
+	background-color: #937DC2;
+}
+
+.App{
+	margin-top: 1rem;
+}
+
+input{
+	height: 45px;
+	width: 60%;
+	position: relative;
+	left: 5%;
+	font-size: 30px
+}
+button{
+	height: 50px;
+	width: 60px;
+	position: relative;
+	left: 5%;
+	bottom: 5px;
+	background-color: #FFABE1;
+	border-radius: 5px;
+	border: 0;
+	outline: 0;
+}
+
+h1{
+	position: relative;
+	left: 7%;
+	top: -51px;
+	z-index: 2;
+	font-family: Poppins;
+	font-size: 60px;
+	text-shadow: -2px 0px #FFABE1, 0px 2px #FFABE1, 2px 0px #FFABE1, 0px -2px #FFABE1;
 }

@@ -22,8 +22,8 @@ export default class TodoItem extends React.Component<IProps>{
 					app.switchChecked(id);
 				}}/>}
 			</div>
-			<span>&nbsp;<span className={checked ? 'line text' : 'text'}>{text}</span>&nbsp;</span>
-			<div className='right'>
+			<span className='scroll'>&nbsp;<span className={checked ? 'line text' : 'text'}>{text}</span>&nbsp;</span>
+			<div className='right remove'>
 				<MdDelete onClick={function(){
 					app.removeTodo(id);
 				}}/>
