@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Todo from './todo/Todo';
 import TodoList from './components/TodoList';
 import './App.css';
@@ -9,31 +9,62 @@ interface IState{
 }
 
 export default class App extends React.Component<{}, IState>{
-	constructor(props:any){
+	todoId: number = 0;
+
+	constructor(props: {}){
 		super(props);
 		this.state = {
 			todo: '',
 			todoList: []
 		};
-		const onSubmit = this.onSubmit.bind(this);
+	}
+
+	private nextTodoId() : number{
+		return this.todoId++;
+	}
+
+	private getTodoList() : Todo[]{
+		return this.state.todoList;
+	}
+
+	private setNewState(state: any) : void{
+		(function() : void{
+			this.setState(state)
+		}).bind(this)();
 	}
 
 	private onSubmit() : void{
-		if(this.state.todo.trim() === ''){
-			alert('내용을 입력해주세요');
+		const text = this.state.todo;
+		if(text.trim() === ''){
+			this.setNewState({
+				todo: ''
+			});
+			alert('내용을 입력해주세요. ');
 			return;
 		}
-		this.setState({
-			todo: ''
+		this.setNewState({
+			todo: '',
+			todoList: this.getTodoList().concat(new Todo(
+				this.nextTodoId(),
+				text
+			))
 		});
 	}
 
-	switchChecked(id: number) : void{
-		
+	public removeTodo(id: number) : void{
+		const todos = this.getTodoList().filter(todo => todo.id !== id)
+		todos.sort();
+		this.setNewState({
+			todoList: todos
+		});
 	}
 
-	removeTodo(id: number) : void{
-		
+	public switchChecked(id: number) : void{
+		this.setNewState({
+			todoList: this.getTodoList().map(function(todo: Todo) : Todo{
+				return todo.id === id ? {...todo, checked: !todo.checked} : todo
+			})
+		});
 	}
 
 	public render(){
@@ -43,7 +74,7 @@ export default class App extends React.Component<{}, IState>{
 				name='todo'
 				type='text'
 				value={this.state.todo}
-				onKeyUp={function(ev: any) : void{
+				onKeyUp={function(ev: React.KeyboardEvent<HTMLInputElement>) : void{
 					if(ev.key === 'Enter'){
 						this.onSubmit();
 					}
@@ -53,13 +84,12 @@ export default class App extends React.Component<{}, IState>{
 				}.bind(this)}
 			/>
 			<button onClick={function() : void{
-				this.onSubmit();
-			}.bind(this)} >추가</button>
+				this.onSubmit()
+			}.bind(this)}>추가</button>
 			<h1>TodoList</h1>
 			<TodoList
-				switchChecked={this.switchChecked}
-				removeTodo={this.removeTodo}
-				todoList={this.state.todoList}
+				app={this}
+				todoList={this.getTodoList()}
 			/>
 		</div>;
 	}

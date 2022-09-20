@@ -1,0 +1,18 @@
+.todoItem{
+	padding: 5px;
+	font-size: 30px;
+	margin-bottom: 20px;
+	background-color: white;
+	border-radius: 20px;
+	box-shadow: 1px 2px 0 1px #FFE6F7;
+	display: flex;
+}
+
+.line{
+	text-decoration-line: line-through;
+	text-decoration-color: #FFABE1;
+}
+
+MdDelete{
+	flex-direction: column-reverse;
+}

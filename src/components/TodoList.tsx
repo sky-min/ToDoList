@@ -1,36 +1,25 @@
 import React from 'react';
+import App from './../App';
 import Todo from './../todo/Todo'
 import TodoItem from './TodoItem';
+import './TodoList.css';
 
 interface IProps{
-	switchChecked: any
-	removeTodo: any
+	app: App,
 	todoList: Todo[]
 }
 
-export default class TodoList extends React.Component<IProps, {} >{
-	todoId: number;
-
-	constructor(props:any){
-		super(props);
-		this.todoId = 0;
-	}
-
-	private nextTodoId() : number{
-		return this.todoId++;
-	}
+export default class TodoList extends React.Component<IProps>{
 
 	render(){
 		const iprops = this.props;
 		return <div className='todolist'>
-			{iprops.todoList.map(function(todo: any){
+			{iprops.todoList.map(function(todo: Todo){
 				return <TodoItem
-					switchChecked={iprops.switchChecked}
-					removeTodo={iprops.removeTodo} 
-					key={this.nextTodoId}
+					app={iprops.app}
 					todo={todo}
 				/>;
-			}.bind(this))}
+			})}
 		</div>
 	}
 
