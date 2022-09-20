@@ -1,26 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
+import Todo from './todo/Todo';
+import TodoList from './components/TodoList';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface IState{
+	todo: string
+	todoList: Todo[]
 }
 
-export default App;
+export default class App extends React.Component<{}, IState>{
+	constructor(props:any){
+		super(props);
+		this.state = {
+			todo: '',
+			todoList: []
+		};
+		const onSubmit = this.onSubmit.bind(this);
+	}
+
+	private onSubmit() : void{
+		if(this.state.todo.trim() === ''){
+			alert('내용을 입력해주세요');
+			return;
+		}
+		this.setState({
+			todo: ''
+		});
+	}
+
+	switchChecked(id: number) : void{
+		
+	}
+
+	removeTodo(id: number) : void{
+		
+	}
+
+	public render(){
+		return <div className='App'>
+			<input
+				autoComplete='off'
+				name='todo'
+				type='text'
+				value={this.state.todo}
+				onKeyUp={function(ev: any) : void{
+					if(ev.key === 'Enter'){
+						this.onSubmit();
+					}
+				}.bind(this)}
+				onChange={function(ev: React.ChangeEvent<HTMLInputElement>) : void{
+					this.setState({todo: ev.currentTarget.value});
+				}.bind(this)}
+			/>
+			<button onClick={function() : void{
+				this.onSubmit();
+			}.bind(this)} >추가</button>
+			<h1>TodoList</h1>
+			<TodoList
+				switchChecked={this.switchChecked}
+				removeTodo={this.removeTodo}
+				todoList={this.state.todoList}
+			/>
+		</div>;
+	}
+}
