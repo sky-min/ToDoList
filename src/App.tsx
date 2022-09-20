@@ -39,7 +39,7 @@ export default class App extends React.Component<{}, IState>{
 			this.setNewState({
 				todo: ''
 			});
-			alert('내용을 입력해주세요. ');
+			alert('Please enter content.');
 			return;
 		}
 		this.setNewState({
