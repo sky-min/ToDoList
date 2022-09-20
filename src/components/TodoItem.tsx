@@ -15,7 +15,7 @@ export default class TodoItem extends React.Component<IProps>{
 		const {id, text, checked} = iprops.todo;
 		const app = iprops.app;
 		return <div className='todoItem'>
-			<div className='content'>
+			<div>
 				{checked ? <MdCheckBox onClick={function(){
 					app.switchChecked(id);
 				}}/> : <MdCheckBoxOutlineBlank onClick={function(){
@@ -23,7 +23,7 @@ export default class TodoItem extends React.Component<IProps>{
 				}}/>}
 			</div>
 			<span>&nbsp;<span className={checked ? 'line text' : 'text'}>{text}</span>&nbsp;</span>
-			<div className='content'>
+			<div className='right'>
 				<MdDelete onClick={function(){
 					app.removeTodo(id);
 				}}/>
