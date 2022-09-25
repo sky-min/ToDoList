@@ -23,7 +23,8 @@
 }
 
 .scroll{
-	overflow-x: scroll;
+	overflow: auto;
+	white-space: nowrap;
 }
 
 .remove{

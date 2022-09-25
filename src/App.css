@@ -35,6 +35,7 @@ button{
 
 h1{
 	position: relative;
+	width: 250px;
 	left: 7%;
 	top: -51px;
 	z-index: 2;
